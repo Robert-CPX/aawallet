@@ -33,3 +33,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Compiler files
+/contracts/cache/
+/contracts/out/
+
+# Ignores development broadcast logs
+/contracts/broadcast/
+
+# Docs
+/contracts/docs/
+
+# Dotenv file
+/contracts/.env

@@ -9,7 +9,7 @@ import {Initializable} from "@openzeppelin/contracts/proxy/utils/Initializable.s
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 import {TokenCallbackHandler} from "account-abstraction/samples/callback/TokenCallbackHandler.sol";
 
-abstract contract Wallet is BaseAccount, Initializable, UUPSUpgradeable, TokenCallbackHandler {
+contract Wallet is BaseAccount, Initializable, UUPSUpgradeable, TokenCallbackHandler {
   using ECDSA for bytes32;
 
   address public immutable walletFactory;
@@ -26,7 +26,7 @@ abstract contract Wallet is BaseAccount, Initializable, UUPSUpgradeable, TokenCa
     _;
   }
 
-  constructor(address walletFactory_, IEntryPoint entryPoint_) {
+  constructor(IEntryPoint entryPoint_, address walletFactory_) {
     walletFactory = walletFactory_;
     _entryPoint = entryPoint_;
   }
@@ -82,7 +82,7 @@ abstract contract Wallet is BaseAccount, Initializable, UUPSUpgradeable, TokenCa
     bytes calldata func
   ) external _requireFromEntryPointOrFactory() {
     _call(dest, value, func);
-  };
+  }
 
   function executeBatch(
     address[] calldata dests,

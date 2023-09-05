@@ -1,6 +1,6 @@
 import { prisma } from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
-import { isAddress } from "viem";
+import { isAddress } from "ethers/lib/utils";
 
 const GET = async (req: NextRequest) => {
   try {

@@ -2,7 +2,7 @@ import { defaultAbiCoder, keccak256 } from "ethers/lib/utils";
 import { Constants, IUserOperation } from "userop";
 import { goerli } from "wagmi/chains";
 
-const getUserOpHash = async (userOp: IUserOperation) => {
+export const getUserOpHash = async (userOp: IUserOperation) => {
   const encodeUserOp = defaultAbiCoder.encode(
     [
       "address",

@@ -10,12 +10,12 @@ import { concat } from "ethers/lib/utils";
 import { Client, Presets } from "userop";
 import { getUserOperationBuilder } from "./getUserOperationBuilder";
 
-const getUserOpForETHTransfer = async (
+export const getUserOpForETHTransfer = async (
   walletAddress: string,
   owners: string[],
   salt: string,
   toAddress: string,
-  amount: string,
+  amount: BigNumber,
   isDeployed: boolean
 ) => {
   try {

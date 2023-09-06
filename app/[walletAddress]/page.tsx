@@ -7,11 +7,11 @@ import { useAccount, useWalletClient } from 'wagmi'
 import { getUserOpHash } from '@/utils/getUserOpHash'
 import TransactionList from '@/components/TransactionList'
 
-interface Props {
-  walletAddress: string,
-}
-
-const Page = (params: Props) => {
+const Page = ({
+  params: {walletAddress},
+}:{
+  params: {walletAddress: string},
+}) => {
   const [amount, setAmount] = useState(0);
   const [toAddress, setToAddress] = useState("");
 
@@ -21,14 +21,14 @@ const Page = (params: Props) => {
 
   const fetchUserOp = async () => {
     try {
-      const response = await fetch(`/api/fetch-wallet?walletAddress=${params.walletAddress}`)
+      const response = await fetch(`/api/fetch-wallet?walletAddress=${walletAddress}`)
       const data = await response.json();
       if (data.error) throw new Error(data.error);
 
       const amountBigInt = parseEther(amount.toString());
 
       const userOp = await getUserOpForETHTransfer(
-        params.walletAddress,
+        walletAddress,
         data.signers,
         data.salt,
         toAddress,
@@ -59,7 +59,6 @@ const Page = (params: Props) => {
         message: { raw: userOpHash as `0x${string}` },
       });
 
-      const walletAddress = params.walletAddress;
       const response = await fetch("/api/create-transaction", {
         method: "POST",
         body: JSON.stringify({
@@ -91,7 +90,7 @@ const Page = (params: Props) => {
     <div className="flex flex-col py-6 items-center gap-5">
       <h1 className="text-5xl font-bold">Manage Wallet</h1>
       <h3 className="text-xl font-medium border-b border-gray-700">
-        {params.walletAddress}
+        {walletAddress}
       </h3>
 
       <p className="text-lg font-bold">Send ETH</p>
@@ -124,7 +123,7 @@ const Page = (params: Props) => {
         )}
       </button>
       {userAddress && (
-        <TransactionList address={userAddress} walletAddress={params.walletAddress} />
+        <TransactionList address={userAddress} walletAddress={walletAddress} />
       )}
     </div>
   );

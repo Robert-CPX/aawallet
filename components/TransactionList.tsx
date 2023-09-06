@@ -140,6 +140,7 @@ const TransactionList = ({address, walletAddress}: TransactionListProps) => {
 
   useEffect(() => {
     fetchTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[address]);
 
   if (!isMounted) return null;

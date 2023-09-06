@@ -5,6 +5,7 @@ import { parseEther } from 'ethers/lib/utils'
 import { getUserOpForETHTransfer } from '@/utils/getUserOpForETHTransfer'
 import { useAccount, useWalletClient } from 'wagmi'
 import { getUserOpHash } from '@/utils/getUserOpHash'
+import TransactionList from '@/components/TransactionList'
 
 interface Props {
   walletAddress: string,
@@ -122,6 +123,9 @@ const Page = (params: Props) => {
           `Create Txn`
         )}
       </button>
+      {userAddress && (
+        <TransactionList address={userAddress} walletAddress={params.walletAddress} />
+      )}
     </div>
   );
 }

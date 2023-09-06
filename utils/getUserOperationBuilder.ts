@@ -27,5 +27,4 @@ export const getUserOperationBuilder = (
     console.error(error);
     throw error;
   }
-  
 };

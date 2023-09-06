@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAddress } from "ethers/lib/utils";
 import { prisma } from "@/utils/db";
 
-const GET = async (req: NextRequest) => {
+export const GET = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
     const walletAddress = searchParams.get("walletAddress");
@@ -25,5 +25,3 @@ const GET = async (req: NextRequest) => {
     return NextResponse.json({error});
   }
 };
-
-export default GET;

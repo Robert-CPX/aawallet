@@ -4,9 +4,13 @@ import WalletList from '@/components/WalletList'
 import Link from 'next/link'
 import React from 'react'
 import { useAccount } from 'wagmi'
+import { useIsMounted } from '@/hooks/useIsMounted'
 
 const Home = () => {
   const { isConnected, address } = useAccount();
+  const isMounted = useIsMounted();
+
+  if (!isMounted) return null;
 
   return (
     <main className='flex flex-col py-6'>

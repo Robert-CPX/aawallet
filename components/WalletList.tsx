@@ -13,7 +13,7 @@ const WalletList = ({address}: {address: string}) => {
   const [wallets, setWallets] = useState<WalletWithTxnsCount[]>([])
 
   useEffect(() => {
-    fetch(`/api/fetch-wallet?address=${address}`)
+    fetch(`/api/fetch-wallets?walletAddress=${address}`)
       .then((res) => res.json())
       .then((data) => setWallets(data));
   }, [address]);

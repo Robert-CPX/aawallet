@@ -2,18 +2,18 @@ import { prisma } from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import { isAddress } from "ethers/lib/utils";
 
-const GET = async (req: NextRequest) => {
+export const GET = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
-    const address = searchParams.get('address');
+    const walletAddress = searchParams.get('walletAddress');
 
-    if (!address) throw new Error('Address is required');
-    if (!isAddress(address)) throw new Error("Invalid address");
+    if (!walletAddress) throw new Error('Address is required');
+    if (!isAddress(walletAddress)) throw new Error("Invalid address");
 
     const wallets = await prisma.wallet.findMany({
       where: {
         signers: {
-          has: address.toLowerCase(),
+          has: walletAddress.toLowerCase(),
         },
       },
       include: {
@@ -30,5 +30,3 @@ const GET = async (req: NextRequest) => {
     return NextResponse.json({error})
   }
 }
-
-export default GET;

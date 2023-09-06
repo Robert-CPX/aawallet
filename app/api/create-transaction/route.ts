@@ -2,7 +2,7 @@ import { prisma } from "@/utils/db";
 import { isAddress } from "ethers/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 
-const POST =async (req: NextRequest) => {
+export const POST =async (req: NextRequest) => {
   try {
     const { walletAddress, userOp, signerAddress, signature } = await req.json();
     if (!isAddress(walletAddress)) {
@@ -31,5 +31,3 @@ const POST =async (req: NextRequest) => {
     return NextResponse.json({error});
   }
 }
-
-export default POST;

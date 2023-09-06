@@ -1,5 +1,6 @@
 import { TransactionWithSignature } from "@/app/api/fetch-transactions/route";
 import React, { useState, useEffect } from "react";
+import { useIsMounted } from "@/hooks/useIsMounted";
 import { getUserOpHash } from "@/utils/getUserOpHash";
 import { useWalletClient } from "wagmi";
 import { getUserOperationBuilder } from "@/utils/getUserOperationBuilder";
@@ -18,6 +19,7 @@ const TransactionList = ({address, walletAddress}: TransactionListProps) => {
 
   const [loading, setLoading] = useState(false);
   const {data: walletClient} = useWalletClient();
+  const isMounted = useIsMounted();
 
   const fetchTransactions = async () => {
     try {
@@ -139,6 +141,8 @@ const TransactionList = ({address, walletAddress}: TransactionListProps) => {
   useEffect(() => {
     fetchTransactions();
   },[address]);
+
+  if (!isMounted) return null;
 
   return (
     <main className="flex flex-col justify-center p-10 items-center gap-5">

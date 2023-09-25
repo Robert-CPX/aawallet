@@ -2,7 +2,6 @@
 
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
-import React from 'react'
 
 const Navbar = () => {
   return (

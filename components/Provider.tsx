@@ -1,6 +1,7 @@
 'use client'
 
 import { RainbowKitProvider, darkTheme, getDefaultWallets } from '@rainbow-me/rainbowkit'
+import "@rainbow-me/rainbowkit/styles.css";
 import React from 'react'
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { goerli } from 'wagmi/chains'
